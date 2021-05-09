@@ -23,8 +23,8 @@ class Board(object):
         # self.current = self.cells[0]
 
     def solve_simple_backtracking(self):
-        # if self.expandedNodes >= 999999999999:
-        #     return False
+        if self.expandedNodes >= 999999:
+            return False
 
         location = self.get_next_location()
         if location[0] == -1:
@@ -48,10 +48,9 @@ class Board(object):
             return False
 
     def get_next_location(self):    
-        for r in range(len(self.board)):
-            for c in range(len(self.board[r])):
-                if self.board[r][c] == '0':
-                    return (r, c)
+        for cell in self.cells:
+            if self.board[cell.row][cell.col] == '0':
+                return (cell.row, cell.col)
         return (-1, -1)
 
     def is_safe(self, row, col, choice):
@@ -72,5 +71,6 @@ class Board(object):
         for r in self.board:
             print(r)
         print()
+        print(self.expandedNodes)
 
             
