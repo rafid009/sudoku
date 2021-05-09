@@ -34,3 +34,18 @@ def count_set_bits(b, limit=9):
 
 def get_block_index(row, col):
     return (row // 3) * 3 + col // 3
+
+def get_cell_index(row, col):
+    return row * 9 + col
+
+def get_intersection_set(*args):
+    b = args[0]
+    for arg in args[1:]:
+        b &= arg
+    return b
+
+def get_union_set(*args):
+    b = arg[0]
+    for arg in args[1:]:
+        b |= arg
+    return b

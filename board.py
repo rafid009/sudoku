@@ -20,8 +20,14 @@ class Board(object):
                     self.cols[j] = set_bit(self.cols[j], board_int)
                     self.blocks[get_block_index(i, j)] = set_bit(self.blocks[get_block_index(i, j)], board_int)
                     self.cells.append(Cell(i, j, is_fixed=True))
-        # self.current = self.cells[0]
-
+        
+    def get_domain(self, row, col):
+        row_remaining = flip_all(self.rows[row])
+        col_remaining = flip_all(self.cols[col])
+        block_remaining = flip_all(self.blocks[get_block_index(row, col)])
+        remaining = get_intersection_set(row_remaining, col_remaining, block_remaining)
+        return remaining
+        
     def solve_simple_backtracking(self):
         if self.expandedNodes >= 999999:
             return False
